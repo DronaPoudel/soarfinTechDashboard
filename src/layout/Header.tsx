@@ -1,11 +1,20 @@
 import React from 'react';
-import { Search, Settings, Bell } from 'react-feather';
+import { Search, Settings, Bell, Menu } from 'react-feather';
 
-const Header = () => {
+interface HeaderProps {
+  toggleSidebar: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   return (
-    <div className="bg-white w-full px-6 py-4">
+    <div className="bg-white w-full px-4 py-4 md:px-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-[#2B3674]">Overview</h1>
+        <div className="flex items-center">
+          <button onClick={toggleSidebar} className="mr-4 md:hidden">
+            <Menu className="w-6 h-6 text-[#2B3674]" />
+          </button>
+          <h1 className="text-2xl font-bold text-[#2B3674]">Overview</h1>
+        </div>
         
         <div className="flex items-center space-x-4 flex-1 max-w-xl mx-auto">
           <div className="relative flex-1">
