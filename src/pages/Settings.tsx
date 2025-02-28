@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Camera, ChevronDown } from 'react-feather';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const formSchema = z.object({
   yourName: z.string().min(2, 'Name is required'),
@@ -22,6 +24,7 @@ type FormData = z.infer<typeof formSchema>;
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('Edit Profile');
   const [profileImage, setProfileImage] = useState('/placeholder.svg');
+  const [birthDate, setBirthDate] = useState(new Date('1990-01-25'));
 
   const {
     register,
@@ -163,7 +166,7 @@ const Settings = () => {
                   </div>
 
                   {/* Date of Birth */}
-                  <div>
+                  {/* <div>
                     <label className="block text-sm text-[#2B3674] mb-2">Date of Birth</label>
                     <div className="relative">
                       <input
@@ -176,7 +179,16 @@ const Settings = () => {
                     {errors.dateOfBirth && (
                       <p className="mt-1 text-xs text-red-500">{errors.dateOfBirth.message}</p>
                     )}
-                  </div>
+                  </div> */}
+                  <div>
+    <label className="block text-sm text-[#2B3674] mb-2">Date of Birth</label>
+    <DatePicker
+      selected={birthDate}
+      onChange={(date: any) => setBirthDate(date)}
+      className="w-full p-3 rounded-lg bg-[#F4F7FE] border border-gray-200 text-[#2B3674]"
+      dateFormat="dd MMMM yyyy"
+    />
+  </div>
 
                   {/* Present Address */}
                   <div>
@@ -274,12 +286,7 @@ const Settings = () => {
                   <span className="ml-2 text-[#2B3674]">Receive SMS notifications</span>
                 </label>
               </div>
-              <div>
-                <label className="flex items-center">
-                  <input type="checkbox" className="form-checkbox h-5 w-5 text-[#2B3674]" />
-                  <span className="ml-2 text-[#2B3674]">Dark mode</span>
-                </label>
-              </div>
+            
             </div>
           </div>
         )}

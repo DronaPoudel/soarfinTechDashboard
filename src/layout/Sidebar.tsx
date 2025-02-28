@@ -7,8 +7,7 @@ interface SidebarProps {
   toggleSidebar: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
-  const location = useLocation();
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {  const location = useLocation();
 
   const menuItems = [
     { icon: Home, text: 'Dashboard', path: '/' },
@@ -30,6 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         }`}
         onClick={toggleSidebar}
       ></div>
+      
       <aside
         className={`fixed top-0 left-0 z-30 w-64 h-full bg-white transition-all duration-300 ease-in-out transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
@@ -47,20 +47,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           </button>
         </div>
         <nav className="mt-6">
-          {menuItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center px-4 py-3 text-sm ${
-                location.pathname === item.path
-                  ? 'bg-[#4318FF] text-white'
-                  : 'text-[#2B3674] hover:bg-gray-100'
-              }`}
-            >
-              <item.icon className="w-5 h-5 mr-3" />
-              <span>{item.text}</span>
-            </Link>
-          ))}
+        <nav className="mt-6">
+        {menuItems.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`flex items-center px-4 py-3 text-sm ${
+              location.pathname === item.path
+                ? 'text-[#4318FF] font-medium border-r-4 border-[#4318FF]'
+                : 'text-[#2B3674] hover:bg-gray-100'
+            }`}
+          >
+            <item.icon className={`w-5 h-5 mr-3 ${location.pathname === item.path ? 'text-[#4318FF]' : ''}`} />
+            <span>{item.text}</span>
+          </Link>
+        ))}
+      </nav>
         </nav>
       </aside>
     </>

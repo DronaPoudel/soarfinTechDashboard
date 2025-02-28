@@ -2,6 +2,7 @@ import React, { Suspense, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Sidebar from './layout/Sidebar';
 import Header from './layout/Header';
+import Cards from './components/MyCards';
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Settings = React.lazy(() => import('./pages/Settings'));
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/loans" element={<div>Loans Page</div>} />
                 <Route path="/services" element={<div>Services Page</div>} />
                 <Route path="/privileges" element={<div>My Privileges Page</div>} />
+                <Route path="/cards" element={<Cards />} />
               </Routes>
             </Suspense>
           </main>
