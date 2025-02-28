@@ -1,38 +1,38 @@
-import { Suspense, lazy } from "react"
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Sidebar from './layout/Sidebar';
+import Header from './layout/Header';
 
-const Dashboard = lazy(() => import("./pages/Dashboard"))
-const Settings = lazy(() => import("./pages/Settings"))
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const Settings = React.lazy(() => import('./pages/Settings'));
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
-        <nav className="bg-white shadow-md">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <Link to="/" className="text-xl font-bold text-blue-600">
-              Financial Dashboard
-            </Link>
-            <div>
-              <Link to="/" className="mr-4 hover:text-blue-600">
-                Dashboard
-              </Link>
-              <Link to="/settings" className="hover:text-blue-600">
-                Settings
-              </Link>
-            </div>
-          </div>
-        </nav>
-        <Suspense fallback={<div className="container mx-auto px-4 py-8">Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </Suspense>
+      <div className="flex min-h-screen bg-[#F4F7FE]">
+        <Sidebar />
+        <div className="flex-1 ml-64">
+          <Header />
+          <main className="p-6">
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/setting" element={<Settings />} />
+                {/* Add placeholder routes for other menu items */}
+                <Route path="/transactions" element={<div>Transactions Page</div>} />
+                <Route path="/accounts" element={<div>Accounts Page</div>} />
+                <Route path="/investments" element={<div>Investments Page</div>} />
+                <Route path="/credit-cards" element={<div>Credit Cards Page</div>} />
+                <Route path="/loans" element={<div>Loans Page</div>} />
+                <Route path="/services" element={<div>Services Page</div>} />
+                <Route path="/privileges" element={<div>My Privileges Page</div>} />
+              </Routes>
+            </Suspense>
+          </main>
+        </div>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
-
+export default App;
